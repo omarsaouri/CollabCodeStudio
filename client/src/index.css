@@ -1,0 +1,46 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --primary: #7c3aed;
+  --primary-content: #ffffff;
+  --primary-dark: #5f14e0;
+  --primary-light: #9b69f1;
+
+  --secondary: #ed7c3a;
+  --secondary-content: #251003;
+  --secondary-dark: #e05f14;
+  --secondary-light: #f19b69;
+
+  --background: #19181b;
+  --foreground: #252329;
+  --border: #3e3b45;
+
+  --copy: #fbfbfb;
+  --copy-light: #d8d6dc;
+  --copy-lighter: #a49fac;
+
+  --success: #3aed3a;
+  --warning: #eded3a;
+  --error: #ed3a3a;
+  --success-content: #032503;
+  --warning-content: #252503;
+  --error-content: #ffffff;
+}
+
+* {
+  font-family: " Rubik", sans-serif;
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

@@ -49,7 +49,7 @@ export default function Navbar() {
             </Link>
           ) : (
             <Link to={"/profile"}>
-              <FaUser className="text-primary-light sm:size-8" />
+              <FaUser className="text-primary-light sm:size-7" />
             </Link>
           )}
         </motion.li>

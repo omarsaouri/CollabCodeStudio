@@ -26,11 +26,14 @@ function Signup() {
 
   const registerUser = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/signup", {
-        name: name,
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        import.meta.env.VITE_API_URL + "/signup",
+        {
+          name: name,
+          email: email,
+          password: password,
+        }
+      );
       navigate("/login");
       toast.success(`Welcome ${response.data.name}`);
       localStorage.setItem("username", response.data.name);
@@ -41,12 +44,12 @@ function Signup() {
 
   return (
     <section className="h-screen flex flex-col justify-center">
-      <div className="flex flex-col gap-10 items-center justify-center text-white bg-foreground  md:w-1/2 my-10 p-10 sm:w-96 rounded-lg shadow-lg ">
+      <div className="flex flex-col gap-10 items-center justify-center text-white bg-foreground  md:w-full my-10 py-10 px-32 sm:w-96 rounded-lg shadow-lg ">
         <div className="flex flex-col gap-5 justify-center items-center">
           <h2 className="text-primary md:text-4xl sm:text-2xl font-Righteous font-bold text-shadow-l text-center">
             Create an Account
           </h2>
-          <p className="text-copy-lighter md:text-xl sm:text-sm font-bold">
+          <p className="text-copy-lighter md:text-xl sm:text-sm font-bold text-center">
             Sign up now to join us.
           </p>
         </div>

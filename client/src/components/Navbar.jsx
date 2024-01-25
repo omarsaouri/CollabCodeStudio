@@ -42,7 +42,7 @@ export default function Navbar() {
                 whileTap={{
                   scale: 0.9,
                 }}
-                className="text-primary-light sm:w-20 sm:px-1 sm:py-2 sm:text-xs font-Righteous border-2 border-primary p-3 rounded-md "
+                className="text-primary-light sm:w-20 sm:px-1 sm:py-2 sm:text-xs md:text-lg font-Righteous border-2 border-primary p-3 rounded-md "
               >
                 sign up
               </motion.button>

@@ -8,7 +8,7 @@ const roomApiRequests = (roomName, roomId) => {
   const joinRoom = async (roomId, noToast) => {
     try {
       const response = await client.get(
-        `http://localhost:3000/room/join/${roomId}`
+        `${import.meta.env.VITE_API_URL}/room/join/${roomId}`
       );
       !noToast && toast.success("Welcome to " + response.data.name);
       navigate(`/room/${response.data.roomId}`);
@@ -22,9 +22,12 @@ const roomApiRequests = (roomName, roomId) => {
 
   const createRoom = async (roomName) => {
     try {
-      const response = await client.post(`http://localhost:3000/room/new`, {
-        roomName: roomName,
-      });
+      const response = await client.post(
+        `${import.meta.env.VITE_API_URL}/room/new`,
+        {
+          roomName: roomName,
+        }
+      );
       toast.success("Welcome to " + response.data.name);
       navigate(`/room/${response.data.roomId}`);
       return response;

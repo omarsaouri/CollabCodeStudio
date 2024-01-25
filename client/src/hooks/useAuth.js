@@ -26,11 +26,14 @@ const useAuth = (doFetchProfile, userId) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await client.get("http://localhost:3000/profile", {
-        params: {
-          userId: userId,
-        },
-      });
+      const response = await client.get(
+        import.meta.env.VITE_API_URL + "/profile",
+        {
+          params: {
+            userId: userId,
+          },
+        }
+      );
       setUser(response.data);
     } catch (error) {
       console.log(error.response);

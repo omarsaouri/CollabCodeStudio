@@ -6,7 +6,7 @@ const profileApiRequests = (userId) => {
   const patchEmoji = async (emoji) => {
     try {
       const response = await client.patch(
-        "http://localhost:3000/profile/emoji?userId=" + userId,
+        import.meta.env.VITE_API_URL + "/profile/emoji?userId=" + userId,
         {
           emoji: emoji,
         }
@@ -21,7 +21,7 @@ const profileApiRequests = (userId) => {
   const patchColor = async (color) => {
     try {
       const response = await client.patch(
-        "http://localhost:3000/profile/color?userId=" + userId,
+        import.meta.env.VITE_API_URL + "/profile/color?userId=" + userId,
         {
           color: color,
         }

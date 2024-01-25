@@ -30,7 +30,7 @@ function Room() {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState();
   const navigate = useNavigate();
-  const socket = io("http://localhost:3000");
+  const socket = io(import.meta.env.VITE_API_URL);
 
   useEffect(() => {
     initializeSocket(socket, id, setUsers);

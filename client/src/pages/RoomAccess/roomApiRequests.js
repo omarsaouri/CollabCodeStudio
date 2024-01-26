@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 const roomApiRequests = (roomName, roomId) => {
   const navigate = useNavigate();
   const client = useAxiosClient();
-  const joinRoom = async (roomId, noToast, setRoomName) => {
+  const joinRoom = async (roomId, noToast) => {
     try {
       const response = await client.get(
         `${import.meta.env.VITE_API_URL}/room/join/${roomId}`
       );
       !noToast && toast.success("Welcome to " + response.data.name);
       navigate(`/room/${response.data.roomId}`);
-      await setRoomName(response.data.name.toString());
     } catch (error) {
       toast.error(error.response.data);
       navigate("/room");

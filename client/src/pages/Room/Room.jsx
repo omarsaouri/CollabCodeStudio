@@ -47,7 +47,7 @@ function Room() {
       isInitialRender.current = false;
       return;
     }
-    joinRoom(id, true, setRoomName);
+    joinRoom(id, true);
   }, []);
 
   const copyIdToClipboard = () => {
@@ -95,11 +95,7 @@ function Room() {
 
   return (
     <section className="h-full w-full flex ">
-      <aside className="min-w-52 p-3 pt-1 flex flex-col gap-10">
-        <h1 className=" text-center text-primary underline underline-offset-2 font-Righteous text-3xl p-2 rounded-sm">
-          {roomName}
-        </h1>
-
+      <aside className="min-w-52 p-3 flex flex-col gap-10">
         <div className="flex flex-col gap-5">
           <div className="flex items-center gap-2 text-2xl text-primary text-shadow-md">
             <HiOutlineStatusOnline className="text-secondary text-3xl" />

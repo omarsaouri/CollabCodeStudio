@@ -12,7 +12,7 @@ const roomApiRequests = (roomName, roomId) => {
       );
       !noToast && toast.success("Welcome to " + response.data.name);
       navigate(`/room/${response.data.roomId}`);
-      await setRoomName(response.data.name);
+      await setRoomName(response.data.name.toString());
     } catch (error) {
       toast.error(error.response.data);
       navigate("/room");
@@ -30,7 +30,6 @@ const roomApiRequests = (roomName, roomId) => {
       );
       toast.success("Welcome to " + response.data.name);
       navigate(`/room/${response.data.roomId}`);
-      return response.data;
     } catch (error) {
       toast.error(error.response.data);
       return error;

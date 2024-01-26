@@ -88,11 +88,11 @@ function Login() {
         </form>
 
         <div className="flex gap-2 items-center">
-          <p className="text-xs text-copy-lighter">
+          <p className="text-xs text-copy-lighter text-center">
             You dont have an account yet ?
           </p>
           <motion.button
-            className="text-sm font-semibold text-secondary-dark border border-secondary-dark p-1 rounded-sm"
+            className=" sm:w-36 md:w-20 text-sm font-semibold text-secondary-dark border border-secondary-dark p-1 rounded-sm"
             onClick={() => {
               navigate("/signup");
             }}

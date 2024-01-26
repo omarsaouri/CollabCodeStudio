@@ -14,7 +14,7 @@ const { createServer } = require("http");
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://collab-code-studio-ccs.onrender.com",
+    origin: process.env.FRONT_URL,
     methods: ["GET", "POST"],
   },
 });
@@ -61,7 +61,6 @@ const getAllConnectedUsers = (roomId) => {
 
 io.on("connection", (socket) => {
   //JOIN
-
   socket.on("JOIN", ({ roomId, username, color, emoji }) => {
     userSocketMap[socket.id] = { username, emoji, color };
 
@@ -81,8 +80,14 @@ io.on("connection", (socket) => {
     });
   });
   //CODE_CHANGE
-  socket.on("CODE_CHANGE", ({ roomId, code }) => {
-    socket.in(roomId).emit("CODE_CHANGE", { code });
+  socket.on("CODE_CHANGE", ({ roomId, code, username }) => {
+    const usersInRoom = getAllConnectedUsers(roomId);
+    console.log(usersInRoom);
+    usersInRoom
+      .filter((user) => user.username !== username)
+      .forEach((user) =>
+        socket.to(user.socketId).emit("CODE_CHANGE", { code })
+      );
   });
   //SYNC_CODE
   socket.on("SYNC_CODE", ({ roomId, value }) => {

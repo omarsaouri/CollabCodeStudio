@@ -15,10 +15,17 @@ function CodeEditor({
     socket.on("CODE_CHANGE", ({ code }) => {
       setValue(code);
     });
-  }, [value]);
+    socket.on("UPDATE_CODE", (value) => {
+      setValue(value);
+    });
+  }, []);
 
   const onChange = (code) => {
-    socket.emit("CODE_CHANGE", { roomId, code });
+    socket.emit("CODE_CHANGE", {
+      roomId,
+      code,
+      username: localStorage.getItem("username"),
+    });
     setValue(code);
   };
 
@@ -26,9 +33,6 @@ function CodeEditor({
     if (value !== "") {
       socket.emit("SYNC_CODE", { roomId, value });
     }
-    socket.on("UPDATE_CODE", (value) => {
-      setValue(value);
-    });
   }, [users]);
 
   useEffect(() => {
@@ -36,16 +40,16 @@ function CodeEditor({
   }, [langSelectedOption]);
 
   return (
-    <>
-      <CodeMirror
-        value={value}
-        width="100vw"
-        height="100vh"
-        onChange={onChange}
-        extensions={extension}
-        theme={themeSelectedOption.theme}
-      />
-    </>
+    <CodeMirror
+      value={value}
+      maxWidth="100vw"
+      minWidth="100vw"
+      maxHeight="100vh"
+      minHeight="100vh"
+      onChange={onChange}
+      extensions={extension}
+      theme={themeSelectedOption.theme}
+    />
   );
 }
 

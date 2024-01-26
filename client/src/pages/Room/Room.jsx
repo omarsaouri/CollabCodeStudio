@@ -22,6 +22,7 @@ function Room() {
     themeOptions[0]
   );
   const userId = localStorage.userId;
+  const [roomName, setRoomName] = useState("");
   const [cookies] = useCookies(["access_token"]);
   const isInitialRender = useRef(true);
   const { id } = useParams();
@@ -46,8 +47,8 @@ function Room() {
       isInitialRender.current = false;
       return;
     }
-    joinRoom(id, true);
-  }, [id]);
+    joinRoom(id, true, setRoomName);
+  }, []);
 
   const copyIdToClipboard = () => {
     navigator.clipboard.writeText(id);
@@ -94,11 +95,15 @@ function Room() {
 
   return (
     <section className="h-full w-full flex ">
-      <aside className="min-w-52 p-3 flex flex-col gap-10">
+      <aside className="min-w-52 p-3 pt-1 flex flex-col gap-10">
+        <h1 className=" text-center text-primary underline underline-offset-2 font-Righteous text-3xl p-2 rounded-sm">
+          {roomName}
+        </h1>
+
         <div className="flex flex-col gap-5">
           <div className="flex items-center gap-2 text-2xl text-primary text-shadow-md">
             <HiOutlineStatusOnline className="text-secondary text-3xl" />
-            <h2 className="font-Righteous">Connected</h2>
+            <h3 className="font-Righteous">Connected</h3>
           </div>
           <ul className="flex max-w-48 max-h-52 flex-wrap gap-2 overflow-scroll ">
             {users.map((user) => (
@@ -117,7 +122,7 @@ function Room() {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-xl text-primary underline text-shadow-md">
               <FaCode className="text-primary-dark text-2xl" />
-              <h3 className="font-Righteous">Select language</h3>
+              <h4 className="font-Righteous">Select language</h4>
             </div>
             <Select
               styles={selectStyles}
@@ -131,7 +136,7 @@ function Room() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2 text-xl text-primary underline text-shadow-md">
               <IoColorPaletteSharp className="text-primary-dark text-2xl" />
-              <h3 className="font-Righteous">Select Theme</h3>
+              <h4 className="font-Righteous">Select Theme</h4>
             </div>
             <Select
               styles={selectStyles}

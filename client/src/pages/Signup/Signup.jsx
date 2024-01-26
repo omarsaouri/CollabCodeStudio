@@ -148,7 +148,7 @@ function Signup() {
         </form>
 
         <div className="flex gap-2 items-center">
-          <p className="text-xs text-copy-lighter">
+          <p className="text-xs text-copy-lighter text-center">
             You already have an account ?
           </p>
           <motion.button

@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 const roomApiRequests = (roomName, roomId) => {
   const navigate = useNavigate();
   const client = useAxiosClient();
-  const joinRoom = async (roomId, noToast) => {
+  const joinRoom = async (roomId, noToast, setRoomName) => {
     try {
       const response = await client.get(
         `${import.meta.env.VITE_API_URL}/room/join/${roomId}`
       );
       !noToast && toast.success("Welcome to " + response.data.name);
       navigate(`/room/${response.data.roomId}`);
-      return response;
+      await setRoomName(response.data.name);
     } catch (error) {
       toast.error(error.response.data);
       navigate("/room");
@@ -30,7 +30,7 @@ const roomApiRequests = (roomName, roomId) => {
       );
       toast.success("Welcome to " + response.data.name);
       navigate(`/room/${response.data.roomId}`);
-      return response;
+      return response.data;
     } catch (error) {
       toast.error(error.response.data);
       return error;

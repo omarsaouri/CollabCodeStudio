@@ -38,7 +38,7 @@ const initializeSocket = async (socket, id, setUsers) => {
     });
 
     socket.on("JOINED", ({ users, username, socketId }) => {
-      if (username !== localStorage.username) {
+      if (username !== localStorage.username && username) {
         toast(username + " joined.", {
           icon: "👏",
           id: "unique",

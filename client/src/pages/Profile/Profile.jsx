@@ -1,12 +1,14 @@
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { IoIosColorFill } from "react-icons/io";
+import { MdEmojiEmotions, MdLogout } from "react-icons/md";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import ProfileCard from "../../components/ProfileCard.jsx";
 import useAuth from "../../hooks/useAuth.js";
 import useAxiosClient from "../../hooks/useAxiosClient.js";
 import ColorModal from "./ColorModal.jsx";
 import EmojiModal from "./EmojiModal.jsx";
-import ProfileCard from "../../components/ProfileCard.jsx";
-import { MdEmojiEmotions } from "react-icons/md";
-import { IoIosColorFill } from "react-icons/io";
-import { motion } from "framer-motion";
 
 function Profile() {
   const userId = localStorage.userId;
@@ -16,6 +18,8 @@ function Profile() {
   const [userColor, setUserColor] = useState();
   const [emojiModalIsOpen, setEmojiModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const [cookies, setCookies] = useCookies();
 
   const openEmojiModal = () => {
     setEmojiModalIsOpen(true);
@@ -30,6 +34,15 @@ function Profile() {
   useEffect(() => {
     user.color && setUserColor(user.color);
   }, [user.color]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("emoji");
+    localStorage.removeItem("color");
+    setCookies("access_token", null);
+    navigate("/");
+  };
 
   const btnMotion = {
     hover: {
@@ -135,6 +148,30 @@ function Profile() {
             colorModalIsOpen={colorModalIsOpen}
             setColorModalIsOpen={setColorModalIsOpen}
           />
+
+          <motion.button
+            onClick={handleLogout}
+            initial="rest"
+            whileHover="hover"
+            whileTap={{ scale: 0.9 }}
+            animate="rest"
+            variants={btnMotion}
+            className="flex items-center gap-2 bg-error rounded-lg shadow-md"
+          >
+            <motion.div variants={btnIconMotion}>
+              <MdLogout
+                className="bg-error p-1 rounded-l-lg border-r-2 border-copy-lighter"
+                size={40}
+              />
+            </motion.div>
+
+            <motion.span
+              variants={btnTextMotion}
+              className="pr-2 font-bold text-shadow-md text-copy"
+            >
+              Logout
+            </motion.span>
+          </motion.button>
         </div>
       </div>
     </motion.section>

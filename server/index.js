@@ -65,7 +65,6 @@ io.on("connection", (socket) => {
     userSocketMap[socket.id] = { username, emoji, color };
 
     socket.join(roomId);
-    console.log(socket.id, "joined ", roomId);
 
     const users = getAllConnectedUsers(roomId);
 
@@ -82,7 +81,7 @@ io.on("connection", (socket) => {
   //CODE_CHANGE
   socket.on("CODE_CHANGE", ({ roomId, code, username }) => {
     const usersInRoom = getAllConnectedUsers(roomId);
-    console.log(usersInRoom);
+
     usersInRoom
       .filter((user) => user.username !== username)
       .forEach((user) =>

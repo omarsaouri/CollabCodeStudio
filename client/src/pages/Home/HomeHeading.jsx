@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 function HomeHeading() {
   const navigate = useNavigate();
   return (
-    <div className="flex-2 flex flex-col tracking-widest gap-10">
+    <div className="flex-2 flex flex-row lg:flex-col items-center lg:items-start tracking-widest gap-2 sm:gap-4 lg:gap-8 w-full px-4 sm:px-0">
       <motion.h1
         initial={{ x: -500 }}
         animate={{ x: 0 }}
         transition={{ delay: 0 }}
-        className="font-Righteous sm:text-9xl md:text-7xl lg:text-8xl  text-shadow-lg text-primary-light"
+        className="font-Righteous text-3xl sm:text-4xl lg:text-8xl text-shadow-lg text-primary-light text-center lg:text-left"
       >
         Collab
       </motion.h1>
@@ -19,7 +19,7 @@ function HomeHeading() {
         initial={{ x: -500 }}
         animate={{ x: 0 }}
         transition={{ delay: 0.2 }}
-        className="font-Righteous sm:text-9xl md:text-7xl lg:text-8xl text-shadow-lg text-primary"
+        className="font-Righteous text-3xl sm:text-4xl lg:text-8xl text-shadow-lg text-primary text-center lg:text-left"
       >
         Code
       </motion.h1>
@@ -28,21 +28,10 @@ function HomeHeading() {
         initial={{ x: -500 }}
         animate={{ x: 0 }}
         transition={{ delay: 0.4 }}
-        className="font-Righteous  sm:text-9xl md:text-7xl lg:text-8xl text-shadow-lg text-primary-dark"
+        className="font-Righteous text-3xl sm:text-4xl lg:text-8xl text-shadow-lg text-primary-dark text-center lg:text-left"
       >
         Studio
       </motion.h1>
-
-      <motion.button
-        onClick={() => {
-          navigate("/room");
-        }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="w-max bg-primary-dark shadow-bg  px-10 py-3 font-Righteous text-shadow-lg text-copy sm:text-lg md:text-2xl lg:text-3xl  rounded-md"
-      >
-        New Room
-      </motion.button>
     </div>
   );
 }

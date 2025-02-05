@@ -9,7 +9,7 @@ const nameCheckMiddleware = (req, res, next) => {
   const { state, msg } = checkUsername(name);
 
   if (state) return next();
-  res.status(400).json(msg);
+  res.status(400).json({ error: msg });
 };
 
 const emailCheckMiddleware = async (req, res, next) => {

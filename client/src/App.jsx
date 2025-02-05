@@ -15,7 +15,7 @@ import Signup from "./pages/Signup/Signup";
 function App() {
   return (
     <body className="flex flex-col h-screen w-screen">
-      <header className="bg-background ">
+      <header className="bg-background">
         <Navbar />
       </header>
       <main className="bg-background flex flex-col items-center justify-center">
@@ -34,8 +34,9 @@ function App() {
             background: "#7c3aed",
             color: "#fff",
           },
+          position: window.innerWidth <= 768 ? "top-center" : "bottom-right",
+          duration: 3000,
         }}
-        position="bottom-right"
       />
       <footer className="bg-background mt-auto w-full border-t-2 border-copy-lighter z-30">
         <Footer />

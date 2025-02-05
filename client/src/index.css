@@ -44,3 +44,21 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
+
+.emoji-mart-container {
+  width: 100%;
+}
+
+.emoji-mart {
+  width: 100% !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.emoji-mart-scroll {
+  height: 270px !important;
+}
+
+.emoji-mart-search {
+  display: none;
+}

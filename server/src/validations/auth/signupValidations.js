@@ -1,17 +1,16 @@
 const User = require("../../models/user");
 // An example of an accepted username could be "user123".
-const checkUsername = (username) => {
+const checkUsername = (name) => {
   const allowedCharactersRegex = /^[a-zA-Z0-9_]+$/;
   const consecutiveSpacesRegex = /\s{2,}/;
-  if (!username) return { state: false, msg: "username is required" };
-  if (username.length <= 2)
-    return { state: false, msg: "username must be 4 characters at least " };
-  if (username.length >= 25)
-    return { state: false, msg: "username way too long" };
-  if (!allowedCharactersRegex.test(username))
-    return { state: false, msg: "username containing none allowed characters" };
-  if (consecutiveSpacesRegex.test(username))
-    return { state: false, msg: "username has two consecutive whitespaces" };
+  if (!name) return { state: false, msg: "Name is required" };
+  if (name.length <= 2)
+    return { state: false, msg: "Name must be 4 characters at least " };
+  if (name.length >= 25) return { state: false, msg: "Name way too long" };
+  if (!allowedCharactersRegex.test(name))
+    return { state: false, msg: "Name containing none allowed characters" };
+  if (consecutiveSpacesRegex.test(name))
+    return { state: false, msg: "Name has two consecutive whitespaces" };
   return { state: true, msg: "" };
 };
 //valid email "user@example.com"

@@ -38,24 +38,24 @@ function Signup() {
       toast.success(`Welcome ${response.data.name}`);
       localStorage.setItem("username", response.data.name);
     } catch (error) {
-      console.log(error.response.data);
+      toast.error(error.response.data);
     }
   };
 
   return (
-    <section className="h-screen flex flex-col justify-center">
-      <div className="flex flex-col gap-10 items-center justify-center text-white bg-foreground  md:w-full my-10 py-10 px-32 sm:w-96 rounded-lg shadow-lg ">
-        <div className="flex flex-col gap-5 justify-center items-center">
-          <h2 className="text-primary md:text-4xl sm:text-2xl font-Righteous font-bold text-shadow-l text-center">
+    <section className="min-h-screen flex flex-col justify-center items-center px-4 py-8">
+      <div className="w-full max-w-md bg-foreground rounded-lg shadow-lg p-6 sm:p-8">
+        <div className="flex flex-col gap-4 text-center mb-8">
+          <h2 className="text-primary text-2xl sm:text-3xl md:text-4xl font-Righteous font-bold text-shadow-lg">
             Create an Account
           </h2>
-          <p className="text-copy-lighter md:text-xl sm:text-sm font-bold text-center">
+          <p className="text-copy-lighter text-sm sm:text-base md:text-lg">
             Sign up now to join us.
           </p>
         </div>
 
         <form
-          className="flex flex-col items-center justify-center gap-10"
+          className="flex flex-col gap-6 w-full"
           onSubmit={(e) => {
             e.preventDefault();
             if (
@@ -75,91 +75,97 @@ function Signup() {
             else setTriggerErrorMsg(true);
           }}
         >
-          <div className="flex gap-2 items-center">
-            <FaUser className="text-primary size-6" />
-            <motion.input
-              className="p-2 md:w-72 sm:w-52 rounded-sm border-2 border-primary-light text-black placeholder:text-copy-lighter outline-none "
-              whileFocus={{ scale: 1.01, border: "2px solid #ed7c3a" }}
-              type="name"
-              placeholder="Username"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            {triggerErrorMsg && (
-              <>
-                {!nameFieldState && <HoverErrorMessage errorMsg={nameMsg} />}
-                {nameFieldState && (
-                  <FaCheckCircle size={20} className="text-success" />
-                )}
-              </>
-            )}
-          </div>
-          <div className="flex gap-2 items-center">
-            <MdEmail className="text-primary size-6 " />
-            <motion.input
-              className="p-2 md:w-72 sm:w-52 rounded-sm border-2 border-primary-light text-black placeholder:text-copy-lighter outline-none "
-              type="text"
-              placeholder="Email"
-              whileFocus={{ scale: 1.01, border: "2px solid #ed7c3a" }}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            {triggerErrorMsg && (
-              <>
-                {!emailFieldState && <HoverErrorMessage errorMsg={emailMsg} />}
-                {emailFieldState && (
-                  <FaCheckCircle size={20} className="text-success" />
-                )}
-              </>
-            )}
+          <div className="flex items-center gap-3 w-full">
+            <FaUser className="text-primary text-xl flex-shrink-0" />
+            <div className="flex-grow relative">
+              <motion.input
+                className="w-full p-2.5 rounded-md border-2 border-primary-light text-black placeholder:text-copy-lighter outline-none text-sm sm:text-base"
+                whileFocus={{ scale: 1.01, borderColor: "#ed7c3a" }}
+                type="name"
+                placeholder="Username"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              {triggerErrorMsg && (
+                <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                  {!nameFieldState && <HoverErrorMessage errorMsg={nameMsg} />}
+                  {nameFieldState && (
+                    <FaCheckCircle className="text-success text-lg" />
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="flex gap-2 items-center">
-            <RiLockPasswordFill className="text-primary size-6" />
-            <motion.input
-              className="p-2 md:w-72 sm:w-52 rounded-sm border-2 border-primary-light text-black placeholder:text-copy-lighter outline-none "
-              type="password"
-              placeholder="Password"
-              whileFocus={{ scale: 1.01, border: "2px solid #ed7c3a" }}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {triggerErrorMsg && (
-              <>
-                {!passwordFieldState && (
-                  <HoverErrorMessage errorMsg={passwordMsg} />
-                )}
-                {passwordFieldState && (
-                  <FaCheckCircle size={20} className="text-success" />
-                )}
-              </>
-            )}
+          <div className="flex items-center gap-3 w-full">
+            <MdEmail className="text-primary text-xl flex-shrink-0" />
+            <div className="flex-grow relative">
+              <motion.input
+                className="w-full p-2.5 rounded-md border-2 border-primary-light text-black placeholder:text-copy-lighter outline-none text-sm sm:text-base"
+                type="text"
+                placeholder="Email"
+                whileFocus={{ scale: 1.01, borderColor: "#ed7c3a" }}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {triggerErrorMsg && (
+                <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                  {!emailFieldState && (
+                    <HoverErrorMessage errorMsg={emailMsg} />
+                  )}
+                  {emailFieldState && (
+                    <FaCheckCircle className="text-success text-lg" />
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 w-full">
+            <RiLockPasswordFill className="text-primary text-xl flex-shrink-0" />
+            <div className="flex-grow relative">
+              <motion.input
+                className="w-full p-2.5 rounded-md border-2 border-primary-light text-black placeholder:text-copy-lighter outline-none text-sm sm:text-base"
+                type="password"
+                placeholder="Password"
+                whileFocus={{ scale: 1.01, borderColor: "#ed7c3a" }}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {triggerErrorMsg && (
+                <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                  {!passwordFieldState && (
+                    <HoverErrorMessage errorMsg={passwordMsg} />
+                  )}
+                  {passwordFieldState && (
+                    <FaCheckCircle className="text-success text-lg" />
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
           <motion.button
             type="submit"
-            className="bg-primary-dark shadow-bg py-3 px-6 font-Righteous text-shadow-lg text-copy text-xl rounded-md mt-2"
-            whileHover={{ scale: 0.9 }}
-            whileTap={{ scale: 1.05 }}
+            className="w-full bg-primary-dark shadow-bg py-2.5 sm:py-3 px-6 font-Righteous text-shadow-lg text-copy text-lg sm:text-xl rounded-md mt-4"
+            whileHover={{ scale: 0.98 }}
+            whileTap={{ scale: 0.95 }}
           >
             Sign Up
           </motion.button>
         </form>
 
-        <div className="flex gap-2 items-center">
-          <p className="text-xs text-copy-lighter text-center">
-            You already have an account ?
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mt-8">
+          <p className="text-xs sm:text-sm text-copy-lighter">
+            You already have an account?
           </p>
           <motion.button
-            className="text-sm font-semibold text-secondary-dark border border-secondary-dark p-1 rounded-sm"
-            onClick={() => {
-              navigate("/login");
-            }}
+            className="text-xs sm:text-sm font-semibold text-secondary-dark border border-secondary-dark px-3 py-1 rounded-md"
+            onClick={() => navigate("/login")}
             whileHover={{
               backgroundColor: "#e05f14",
               color: "white",
-              scale: 1.1,
+              scale: 1.02,
             }}
           >
             Login

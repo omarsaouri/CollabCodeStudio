@@ -21,10 +21,12 @@ function Signup() {
   const [nameMsg, setNameMsg] = useState("");
   const [passwordMsg, setPasswordMsg] = useState("");
   const [triggerErrorMsg, setTriggerErrorMsg] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   useHandleLoggedUser();
 
   const registerUser = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.post(
         import.meta.env.VITE_API_URL + "/signup",
@@ -39,6 +41,8 @@ function Signup() {
       localStorage.setItem("username", response.data.name);
     } catch (error) {
       toast.error(error.response.data);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -150,8 +154,16 @@ function Signup() {
             className="w-full bg-primary-dark shadow-bg py-2.5 sm:py-3 px-6 font-Righteous text-shadow-lg text-copy text-lg sm:text-xl rounded-md mt-4"
             whileHover={{ scale: 0.98 }}
             whileTap={{ scale: 0.95 }}
+            disabled={isLoading}
           >
-            Sign Up
+            {isLoading ? (
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-5 h-5 border-t-2 border-r-2 border-white rounded-full animate-spin"></div>
+                <span>Signing up...</span>
+              </div>
+            ) : (
+              "Sign Up"
+            )}
           </motion.button>
         </form>
 

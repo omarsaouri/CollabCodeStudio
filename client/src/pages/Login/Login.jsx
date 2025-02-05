@@ -12,10 +12,12 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cookies, setCookies] = useCookies(["access_token"]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   useHandleLoggedUser();
 
   const loginUser = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.post(
         import.meta.env.VITE_API_URL + "/login",
@@ -33,6 +35,8 @@ function Login() {
       toast.success("Welcome Back " + response.data.user.name);
     } catch (error) {
       toast.error(error.response.data);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,11 +89,19 @@ function Login() {
 
           <motion.button
             type="submit"
-            className="w-full bg-primary-dark shadow-bg py-2.5 sm:py-3 px-6 font-Righteous text-shadow-lg text-copy text-lg sm:text-xl rounded-md mt-4"
+            className="w-full bg-primary-dark shadow-bg py-2.5 sm:py-3 px-6 font-Righteous text-shadow-lg text-copy text-lg sm:text-xl rounded-md mt-4 relative"
             whileHover={{ scale: 0.98 }}
             whileTap={{ scale: 0.95 }}
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? (
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-5 h-5 border-t-2 border-r-2 border-white rounded-full animate-spin"></div>
+                <span>Logging in...</span>
+              </div>
+            ) : (
+              "Login"
+            )}
           </motion.button>
         </form>
 
